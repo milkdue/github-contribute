@@ -2,7 +2,7 @@
  * @Author: 可以清心
  * @Description: 
  * @Date: 2023-01-21 21:43:31
- * @LastEditTime: 2023-01-21 22:28:26
+ * @LastEditTime: 2023-01-21 22:46:58
  * @FilePath: \github-contribute\api\index.js
  */
 const https = require("https");
@@ -25,18 +25,18 @@ module.exports = (req, res) => {
             const $ = cheerio.load(html);
 
             
-            $(".js-yearly-contributions > .position-relative .js-calendar-graph > .js-calendar-graph-svg > g > g").each(g => {
+            $(".js-yearly-contributions > .position-relative .js-calendar-graph > .js-calendar-graph-svg > g > g").each((index, g) => {
                 let item = [];
-                $(g).find("rect").each(rect => {
+                $(g).find("rect").each((index, rect) => {
                     const $r = $(rect);
 
                     const date = $r.attr("data-date");
-                    // const count = Number($r.attr("data-level"));
-                    const count = $r.attr("data-level");
+                    const count = Number($r.attr("data-level"));
+                    // const count = $r.attr("data-level");
 
-                    // if(!isNaN(count)){
-                    //     total += count;
-                    // }
+                    if(!isNaN(count)){
+                        total += count;
+                    }
 
                     item.push({
                         date,
