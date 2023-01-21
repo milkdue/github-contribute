@@ -2,7 +2,7 @@
  * @Author: 可以清心
  * @Description: 
  * @Date: 2023-01-21 21:43:31
- * @LastEditTime: 2023-01-21 22:13:01
+ * @LastEditTime: 2023-01-21 22:18:49
  * @FilePath: \github-contribute\api\index.js
  */
 const https = require("https");
@@ -27,7 +27,7 @@ module.exports = (req, res) => {
             
             $(".js-yearly-contributions > .position-relative .js-calendar-graph > .js-calendar-graph-svg > g > g").each(g => {
                 let item = [];
-                $(g).childre("rect").each(rect => {
+                $(g).find("rect").each(rect => {
                     const $r = $(rect);
 
                     const date = $r.attr("data-date");
