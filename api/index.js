@@ -2,7 +2,7 @@
  * @Author: 可以清心
  * @Description: 
  * @Date: 2023-01-21 21:43:31
- * @LastEditTime: 2023-01-21 22:18:49
+ * @LastEditTime: 2023-01-21 22:28:26
  * @FilePath: \github-contribute\api\index.js
  */
 const https = require("https");
@@ -31,11 +31,12 @@ module.exports = (req, res) => {
                     const $r = $(rect);
 
                     const date = $r.attr("data-date");
-                    const count = Number($r.attr("data-level"));
+                    // const count = Number($r.attr("data-level"));
+                    const count = $r.attr("data-level");
 
-                    if(!isNaN(count)){
-                        total += count;
-                    }
+                    // if(!isNaN(count)){
+                    //     total += count;
+                    // }
 
                     item.push({
                         date,
