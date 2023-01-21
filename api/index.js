@@ -2,7 +2,7 @@
  * @Author: 可以清心
  * @Description: 
  * @Date: 2023-01-21 21:43:31
- * @LastEditTime: 2023-01-21 23:11:56
+ * @LastEditTime: 2023-01-21 23:14:20
  * @FilePath: \github-contribute\api\index.js
  */
 const https = require("https");
@@ -10,8 +10,8 @@ const cheerio = require("cheerio");
 
 module.exports = (req, res) => {  
     const NAME = req.query.name;
-
-    res.header("Access-Control-Allow-Origin","blog.keyiqingxin.cn");
+    // *.keyiqingxin.cn
+    res.header("Access-Control-Allow-Origin","*");
 
     let html = "";
 
