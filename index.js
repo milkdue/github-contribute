@@ -2,12 +2,13 @@
  * @Author: 可以清心
  * @Description: 
  * @Date: 2023-01-21 21:21:37
- * @LastEditTime: 2023-07-15 15:30:24
+ * @LastEditTime: 2023-07-17 18:45:34
  * @FilePath: \github-contribute\index.js
  */
 const https = require("http");
 const fs = require("fs");
 const cheerio = require("cheerio");
+const dayjs = require("dayjs");
 
 const name = "milkdue";
 // let html = `
@@ -1058,3 +1059,4 @@ all.forEach((item, index) => {
 })
 
 console.log(result);
+console.log(dayjs("2023-07-17").subtract(-1, 'day').format('YYYY-MM-DD'));

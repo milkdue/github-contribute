@@ -2,11 +2,12 @@
  * @Author: 可以清心
  * @Description: 
  * @Date: 2023-01-21 21:43:31
- * @LastEditTime: 2023-07-15 15:34:37
+ * @LastEditTime: 2023-07-17 18:46:37
  * @FilePath: \github-contribute\api\index.js
  */
 const https = require("https");
 const cheerio = require("cheerio");
+const dayjs = require('dayjs');
 
 // module.exports = (req, res) => {  
 //     const NAME = req.query.name;
@@ -112,7 +113,14 @@ module.exports = (req, res) => {
             all.forEach((item, index) => {
                 let contribute = [];
                 indexList.forEach(item => {
-                    contribute.push(map.get(item)[index]);
+                    const contriution = map.get(item)[index];
+                    if (!contriution.date) {
+                        const length = contribute.length;
+                        contriution.date = dayjs(contribute[length - 1]).subtract(-1, 'day').format('YYYY-MM-DD')
+                    }
+
+                    contribute.push(contriution);
+                    
                 })
             
                 result.push(contribute);
