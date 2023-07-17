@@ -2,7 +2,7 @@
  * @Author: 可以清心
  * @Description: 
  * @Date: 2023-01-21 21:43:31
- * @LastEditTime: 2023-07-17 18:46:37
+ * @LastEditTime: 2023-07-17 19:26:02
  * @FilePath: \github-contribute\api\index.js
  */
 const https = require("https");
@@ -114,13 +114,14 @@ module.exports = (req, res) => {
                 let contribute = [];
                 indexList.forEach(item => {
                     const contriution = map.get(item)[index];
-                    if (!contriution.date) {
-                        const length = contribute.length;
-                        contriution.date = dayjs(contribute[length - 1]).subtract(-1, 'day').format('YYYY-MM-DD')
-                    }
+                    // if (!contriution.date) {
+                    //     const length = contribute.length;
+                    //     contriution.date = dayjs(contribute[length - 1]).subtract(-1, 'day').format('YYYY-MM-DD')
+                    // }
 
-                    contribute.push(contriution);
-                    
+                    // contribute.push(contriution);
+
+                    contriution.date && contribute.push(contriution);
                 })
             
                 result.push(contribute);
