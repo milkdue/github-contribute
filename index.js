@@ -2,7 +2,7 @@
  * @Author: 可以清心
  * @Description: 
  * @Date: 2023-01-21 22:46:11
- * @LastEditTime: 2023-11-24 14:20:12
+ * @LastEditTime: 2023-11-30 16:50:03
  */
 const http = require("http");
 const cheerio = require("cheerio");
@@ -34,16 +34,8 @@ http.get(`http://127.0.0.1:61416/milkdue.html`, function(resp){
                         // const id = $r.attr("id");;
                         // console.info($(`tool-tip[for="${id}"]`));
                         // const text = $(`tool-tip[for="${$r.attr('id')}"]`).text();
-                        const textNode = $(`tool-tip[for="${$r.attr('id')}"]`).children()[0];
-                        let text = "";
-
-                        if (textNode) {
-                          if (textNode.next) {
-                            text = textNode.next.data;
-                          }
-                        }
-                        // console.log($(`tool-tip[for="${$r.attr('id')}"]`).children()[0].next.data, 'text');
-                        // const text = $(`tool-tip[for="${$r.attr('id')}"]"`).text();
+                        let array = $(`tool-tip[for="${$r.attr('id')}"]`).text().split("}");
+                        let text = array.pop();
                         let count = parseInt(text);
 
                         if(!isNaN(count)){

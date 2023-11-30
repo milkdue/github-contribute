@@ -2,7 +2,7 @@
  * @Author: 可以清心
  * @Description: 
  * @Date: 2023-01-21 21:43:31
- * @LastEditTime: 2023-11-24 14:30:40
+ * @LastEditTime: 2023-11-30 16:51:04
  * @FilePath: \github-contribute\api\index.js
  */
 const https = require("https");
@@ -92,14 +92,8 @@ module.exports = (req, res) => {
                         // text 修正为 tool-tip
                         // const text = $r.text();
                         // const text = $(`tool-tip[for="${$r.attr('id')}"]`).text();
-                        const textNode = $(`tool-tip[for="${$r.attr('id')}"]`).children()[0];
-                        let text = "";
-
-                        if (textNode) {
-                          if (textNode.next) {
-                            text = textNode.next.data;
-                          }
-                        }
+                        let array = $(`tool-tip[for="${$r.attr('id')}"]`).text().split("}");
+                        let text = array.pop();
                         let count = parseInt(text);
 
                         if(!isNaN(count)){
