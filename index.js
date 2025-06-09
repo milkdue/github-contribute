@@ -1,83 +1,52 @@
 /*
  * @Author: 可以清心
- * @Description: 
+ * @Description:
  * @Date: 2023-01-21 22:46:11
- * @LastEditTime: 2023-11-30 16:50:03
+ * @LastEditTime: 2024-11-08 15:54:03
  */
-const http = require("http");
+const https = require("https");
 const cheerio = require("cheerio");
-const dayjs = require('dayjs');
+const dayjs = require("dayjs");
 
 let html = "";
 
-http.get(`http://127.0.0.1:61416/milkdue.html`, function(resp){
-        resp.on("data", function(chunk){
-            html += chunk;
-        });
+https.get(`https://github.com/milkdue`, function (resp) {
+	resp.on("data", function (chunk) {
+		html += chunk;
+	});
 
-        resp.on("end", function(){
-            let map = new Map();
-            let result = [];
-            let total = 0;
+	resp.on("end", function () {
+		let map = new Map();
+		let result = [];
+		let total = 0;
+		console.info(1111)
 
-            const $ = cheerio.load(html);
+		const $ = cheerio.load(html);
 
-            $(".js-yearly-contributions > .position-relative .js-calendar-graph table tbody tr").each((trIndex, tr) => {
-                map.set(trIndex, []);
-                console.log(tr, 'trNode')
-                $(tr).find("td").each((tdIndex, td) => {
-                    if (tdIndex !== 0) {
-                        const $r = $(td);
-                        const date = $r.attr("data-date");
-                        // text 修正为 tool-tip
-                        // const text = $r.text();
-                        // const id = $r.attr("id");;
-                        // console.info($(`tool-tip[for="${id}"]`));
-                        // const text = $(`tool-tip[for="${$r.attr('id')}"]`).text();
-                        let array = $(`tool-tip[for="${$r.attr('id')}"]`).text().split("}");
-                        let text = array.pop();
-                        let count = parseInt(text);
+		console.info($, "$")
 
-                        if(!isNaN(count)){
-                            total += count;
-                        }else{
-                            count = 0;
-                        }
+		$(
+			".js-calendar-graph-table tbody tr",
+		).each((trIndex, tr) => {
+			console.info(tr, "tr")
+			// map.set(trIndex, []);
+			// console.log(tr, "trNode");
+			// $(tr).find("td").each((tdIndex, td) => {
+			// 	if (tdIndex !== 0) {
+			// 		const $r = $(td);
+			// 		const date = $r.attr("data-date");
+			// 		const text = $r.text();
 
-                        map.get(trIndex).push({
-                            date,
-                            count
-                        })
-                    }
-                })
-            })
+			// 		console.info(date, "date");
+			// 		console.info(text, "text")
+			// 		const id = $r.attr("id");
+			// 	}
+			// })
+		})
+		
+	});
 
-            let indexList = [0, 1, 2, 3, 4, 5, 6];
-            let length = map.get(0).length;
-            let all = new Array(length).fill(0);
-
-            all.forEach((item, index) => {
-                let contribute = [];
-                indexList.forEach(item => {
-                    const contriution = map.get(item)[index];
-                    // if (!contriution.date) {
-                    //     const length = contribute.length;
-                    //     contriution.date = dayjs(contribute[length - 1]).subtract(-1, 'day').format('YYYY-MM-DD')
-                    // }
-
-                    // contribute.push(contriution);
-
-                    contriution.date && contribute.push(contriution);
-                })
-            
-                result.push(contribute);
-            })
-
-            console.log(total);
-            console.log(result);
-        });
-
-        resp.on("error", error => {
-            console.error(error);
-        })
-    })
+	resp.on("error", (error) => {
+		console.error(error);
+	});
+});
