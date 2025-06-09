@@ -8,12 +8,17 @@
     <script src="https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js"></script>
 </head>
 <body>
-    一个钉钉测试页面
-    <button id="button">点击唤醒钉钉扫码</button>
+    <div class="qr">
+        <button id="qr">点击唤醒钉钉扫描二维码</button>
+    </div>
+    <div class="bar">
+        <button id="bar">点击唤醒钉钉扫描条形码</button>
+    </div>
     <script>
         const vConsole = new VConsole();
-        let btn = document.getElementById("button");
-        btn.addEventListener("click", () => {
+        let qrBtn = document.getElementById("qr");
+        let barBtn = document.getElementById("bar");
+        qrBtn.addEventListener("click", () => {
             dd.scan({
                 type: 'qr', // 扫码样式，默认值：qr。可选值：qr（二维码扫码框）、bar（条形码扫码框）
                 onSuccess: function(data) {
@@ -25,7 +30,21 @@
                     console.error(err);
                 }
             });
+        });
+        barBtn.addEventListener("click", () => {
+            dd.scan({
+                type: 'bar', // 扫码样式，默认值：qr。可选值：qr（二维码扫码框）、bar（条形码扫码框）
+                onSuccess: function(data) {
+                    // onSuccess将在扫码成功之后回调
+                    console.log(data.text); // 扫码所得数据
+                    alert(data.text);
+                },
+                onFail: function(err) {
+                    console.error(err);
+                }
+            });
         })
+
     </script>
 </body>
 </html>
